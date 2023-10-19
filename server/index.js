@@ -1,5 +1,7 @@
 import express from "express"
 import logger from "morgan"
+import dotenv from "dotenv"
+import { createClient } from "@libsql/client"
 
 import { Server } from "socket.io"
 import {createServer} from "node:http"
@@ -14,6 +16,18 @@ const io = new Server(server, {
     }
 })
 
+
+const db = createClient({
+    url:"libsql://wanted-bloodscream-santos1803.turso.io",
+    authToken: process.env.DB_TOKEN
+})
+
+await db.execute (` 
+CREATE TABLE IF NOT EXISTS users (
+
+
+
+`)
 
 
 io.on("connection", (socket)=>{
